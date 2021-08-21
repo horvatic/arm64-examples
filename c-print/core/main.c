@@ -1,8 +1,6 @@
 #include <stdio.h>
-
-extern int add_int(int x, int y);
-extern void print_hello(void);
-extern void print_word(char * str, size_t buffsize);
+#include "print.h"
+#include "math.h"
 
 void add() {
 	int r = 0;
