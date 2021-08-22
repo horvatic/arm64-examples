@@ -23,7 +23,7 @@ int main(void)
 {
 	printHelloWorldUsingArm64();
 	printAnyStringArm64();
-  readInputPrintInput();
+	readInputPrintInput();
   
 	return 0;
 }
