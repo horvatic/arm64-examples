@@ -17,9 +17,9 @@ buffer:    .skip    BUFFERSIZE
 .text
 .global _start 
 
-quadEnterText:        	.quad  enterText
+quadEnterText:        .quad  enterText
 quadBuffer:          	.quad  buffer
-quadCarriageReturn:	.quad  carriageReturn
+quadCarriageReturn:		.quad  carriageReturn
 
 writeMessage:
     mov x2,0                   // reset size counter to 0

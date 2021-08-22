@@ -1,4 +1,4 @@
-.include "arm64/hello.inc"
+.include "hello/hello.inc"
 
 .data
 

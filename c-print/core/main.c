@@ -1,12 +1,5 @@
-#include <stdio.h>
-#include "print.h"
-#include "math.h"
-
-void add() {
-	int r = 0;
-	r = add_int(1,2);
-	printf("Arm64 Adding 1 + 2: %d\n", r);
-}
+#include "io.h"
+#include "hello.h"
 
 void printHelloWorldUsingArm64() {
 	print_hello();
@@ -14,18 +7,23 @@ void printHelloWorldUsingArm64() {
 
 void printAnyStringArm64() {
 	char s[] = "Printed using ARM64\n";
-	char *c;
-	c = s;
-	printf("Address of word: %p\n", c);
-	printf("Size of word: %zu\n",  sizeof(s));
-	print_word(c, sizeof(s));
+	print_word(&s[0], sizeof(s));
+}
+
+void readInputPrintInput() {
+	int bufferSize = 100;
+	char buffer[bufferSize];
+
+	long inputSize = 0;
+	inputSize = read_word(&buffer[0], bufferSize);
+	print_word(&buffer[0], inputSize);
 }
 
 int main(void)
 {
-	add();
 	printHelloWorldUsingArm64();
 	printAnyStringArm64();
+  readInputPrintInput();
   
 	return 0;
 }
