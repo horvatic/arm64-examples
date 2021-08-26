@@ -1,10 +1,10 @@
 //Consts
-.equ BUFFERSIZE,   100
-.equ STDIN,  0                // linux input console
-.equ STDOUT, 1                // linux output console
-.equ READ,   63 
-.equ WRITE,  64 
-.equ EXIT,   93 
+.equ BUFFER_SIZE,   100
+.equ SYS_STDIN,  0                // linux input console
+.equ SYS_STDOUT, 1                // linux output console
+.equ SYS_READ,   63 
+.equ SYS_WRITE,  64 
+.equ SYS_EXIT,   93 
 
 .data
 enterText:		.asciz "Enter text: "
@@ -12,14 +12,14 @@ carriageReturn:  	.asciz "\n"
 
 //Read Buffer
 .bss 
-buffer:    .skip    BUFFERSIZE
+buffer:    .skip    BUFFER_SIZE
 
 .text
 .global _start 
 
 quadEnterText:        .quad  enterText
-quadBuffer:          	.quad  buffer
-quadCarriageReturn:		.quad  carriageReturn
+quadBuffer:           .quad  buffer
+quadCarriageReturn:   .quad  carriageReturn
 
 writeMessage:
     mov x2,0                   // reset size counter to 0
@@ -31,9 +31,9 @@ checkSize:                     // get size of input
     b checkSize                // loop
 
 output:
+    mov x8,SYS_WRITE               
     mov x1,x0                  // move string address into system call func parm
-    mov x0,STDOUT              
-    mov x8,WRITE               
+    mov x0,SYS_STDOUT              
     svc 0                      // trigger system write
     ret                        
 
@@ -44,10 +44,10 @@ _start:
     bl writeMessage		// output enter message
 
     //Read User Input
-    mov x0,STDIN           	// linux input console
+    mov x0,SYS_STDIN           	// linux input console
     ldr x1,quadBuffer      	// load buffer address 
-    mov x2,BUFFERSIZE      	// load buffer size 
-    mov x8,READ            	// request to read data
+    mov x2,BUFFER_SIZE      	// load buffer size 
+    mov x8,SYS_READ            	// request to read data
     svc 0                  	// trigger system read input
 
     //Output User Message
@@ -62,7 +62,7 @@ _start:
     bl writeMessage
 
     //End Program
-    mov x0, #0             	// return code
-    mov x8, #EXIT          	// request to exit program
+    mov x8, SYS_EXIT          	// request to exit program
+    mov x0, 0             	// return code
     svc 0                 	// trigger end of program
  
