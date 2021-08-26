@@ -11,6 +11,10 @@
 
 - Basic ARM64 for reading user input, then will output
 
-### helloworld-web-server
+### web-server
 
+#### hello-web-server/
 - Basic ARM64 hello world web server
+
+#### long-running-server/
+- Basic ARM64 world web server
